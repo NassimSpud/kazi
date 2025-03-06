@@ -6,10 +6,10 @@ import AuthModal from './AuthModal';
 export default function JobsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Corrected categories definition
   const categories = [
     {
       name: 'Assembly',
+      icon: <FaChair size={30} />,
       subcategories: [
         'General Furniture Assembly',
         'IKEA Assembly',
@@ -19,13 +19,13 @@ export default function JobsPage() {
         'Desk Assembly',
       ],
     },
-    { name: 'Mounting', subcategories: [] },
-    { name: 'Moving', subcategories: [] },
-    { name: 'Cleaning', subcategories: [] },
-    { name: 'Outdoor Help', subcategories: [] },
-    { name: 'Home Repairs', subcategories: [] },
-    { name: 'Painting', subcategories: [] },
-    { name: 'Trending', subcategories: [] },
+    { name: 'Mounting', icon: <FaWrench size={30} />, subcategories: [] },
+    { name: 'Moving', icon: <FaTruck size={30} />, subcategories: [] },
+    { name: 'Cleaning', icon: <FaBroom size={30} />, subcategories: [] },
+    { name: 'Outdoor Help', icon: <FaLeaf size={30} />, subcategories: [] },
+    { name: 'Home Repairs', icon: <FaWrench size={30} />, subcategories: [] },
+    { name: 'Painting', icon: <FaPaintBrush size={30} />, subcategories: [] },
+    { name: 'Trending', icon: <FaFire size={30} />, subcategories: [] },
   ];
 
   return (
@@ -66,34 +66,33 @@ export default function JobsPage() {
       </nav>
 
       {/* Categories and Subcategories Section */}
-      <div className="bg-white shadow-md p-4">
-        <div className="flex items-center space-x-4 overflow-x-auto whitespace-nowrap">
-          {categories.map((category) => (
-            <div key={category.name} className="flex flex-col items-center">
-              <span className="text-sm font-semibold text-gray-700 flex items-center">
-                {category.name === 'Assembly' && <FaChair className="mr-2" />}
-                {category.name === 'Home Repairs' && <FaWrench className="mr-2" />}
-                {category.name === 'Moving' && <FaTruck className="mr-2" />}
-                {category.name === 'Cleaning' && <FaBroom className="mr-2" />}
-                {category.name === 'Outdoor Help' && <FaLeaf className="mr-2" />}
-                {category.name === 'Painting' && <FaPaintBrush className="mr-2" />}
-                {category.name === 'Trending' && <FaFire className="mr-2" />}
-                {category.name}
-              </span>
-              {category.subcategories.length > 0 && (
-                <div className="flex space-x-2 mt-2">
-                  {category.subcategories.map((subcategory) => (
-                    <button
-                      key={subcategory}
-                      className="bg-gray-200 hover:bg-gray-300 text-sm text-gray-700 py-1 px-3 rounded-full"
-                    >
-                      {subcategory}
-                    </button>
-                  ))}
-                </div>
-              )}
+      <div className="bg-white shadow-md py-4">
+        <div className="container mx-auto flex flex-col items-center">
+          <div className="flex items-center space-x-4 overflow-x-auto whitespace-nowrap">
+            {categories.map((category) => (
+              <div key={category.name} className="flex flex-col items-center">
+                <span className="text-sm text-gray-700 mb-1">
+                  <div className="p-3 rounded-full backdrop-blur-md bg-white/30 border border-gray-200">
+                    {category.icon}
+                  </div>
+                </span>
+                <span className="text-sm font-semibold text-gray-700">{category.name}</span>
+              </div>
+            ))}
+          </div>
+          {/* Subcategories for the first category (Assembly) */}
+          {categories[0].subcategories.length > 0 && (
+            <div className="flex space-x-2 mt-4 overflow-x-auto whitespace-nowrap">
+              {categories[0].subcategories.map((subcategory) => (
+                <button
+                  key={subcategory}
+                  className="bg-gray-200 hover:bg-gray-300 text-sm text-gray-700 py-1 px-3 rounded-full"
+                >
+                  {subcategory}
+                </button>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       </div>
 
